@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MockUp</title>
+
+    <style>
+        body {
+            height: 2000px;
+            /* To make the page scrollable */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 100px;
+            /* Space for the fixed header */
+        }
+
+        #header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        #logo {
+            width: 80px;
+            /* Initial width */
+            transition: width 0.1s ease-out;
+            /* Smooth transition for resizing */
+            vertical-align: middle;
+        }
+
+        p {
+            margin: 20px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="header">
+        <img id="logo" src="ranlogo.png" alt="Company Logo">
+    </div>
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente molestiae fuga blanditiis asperiores dicta minus
+    autem nisi impedit, atque aspernatur eos sit, quaerat porro quibusdam hic totam reprehenderit eius praesentium.
+
+
+
+    <script>
+        // JavaScript will go here
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logo');
+            const initialLogoWidth = 80; // Must match the initial width in CSS
+            const maxLogoWidth = 150;    // The maximum width you want the logo to reach
+            const scrollTriggerHeight = 200; // How far down the user needs to scroll to reach max size
+
+            window.onscroll = () => {
+                // Get the current scroll position
+                const scrollY = window.scrollY || window.pageYOffset;
+
+                // Calculate the new width based on scroll position
+                // We'll scale the size between initial and max over the scrollTriggerHeight
+                let newWidth = initialLogoWidth + (scrollY / scrollTriggerHeight) * (maxLogoWidth - initialLogoWidth);
+
+                // Clamp the new width between initialLogoWidth and maxLogoWidth
+                if (newWidth < initialLogoWidth) {
+                    newWidth = initialLogoWidth;
+                } else if (newWidth > maxLogoWidth) {
+                    newWidth = maxLogoWidth;
+                }
+
+                // Apply the new width to the logo
+                logo.style.width = `${newWidth}px`;
+            };
+        });
+
+    </script>
+</body>
+
+</html>
